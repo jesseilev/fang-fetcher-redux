@@ -1,40 +1,32 @@
-
+import * as Redux from 'redux';
 import * as Loop from 'redux-loop';
 import * as Actions from './actions';
 import * as Tasks from './tasks';
 
 
 
+const initCompany = companyName => {
+  return {
+    name: companyName,
+    isFetching: false,
+    repos: []
+  };
+};
+
 export const initialState = {
-    selectedCompany: 'Facebook',
-    companies: {
-        Facebook: {
-            name: 'Facebook',
-            isFetching: false,
-            repos: [],
-        },
-        Amazon: {
-            name: 'Amazon',
-            isFetching: false,
-            repos: []
-        },
-        Netflix: {
-            name: 'Netflix',
-            isFetching: false,
-            repos: []
-        },
-        Google: {
-            name: 'Google',
-            isFetching: false,
-            repos: []
-        }
-    }
+  selectedCompany: 'Facebook',
+  companies: {
+    Facebook: initCompany('Facebook'),
+    Amazon: initCompany('Amazon'),
+    Netflix: initCompany('Netflix'),
+    Google: initCompany('Google')
+  }
 }
 
 
 
 
-const company = (state, action) => {
+const company = (state = initCompany('Facebook'), action) => {
   if (action.companyName !== state.name) {
     return state;
   }
@@ -44,7 +36,7 @@ const company = (state, action) => {
 
     case Actions.REQUEST_REPOS:
       return Loop.loop(
-        Object.assign(state, { isFetching: true }),
+        { ...state, isFetching: true },
         Loop.Cmd.run(Tasks.fetchRepo, {
           successActionCreator: Actions.receiveReposSuccess(state.name),
           failActionCreator: Actions.receiveReposFail,
@@ -53,14 +45,15 @@ const company = (state, action) => {
       );
 
     case Actions.RECEIVE_REPOS_SUCCESS: 
-      return Object.assign(state, { 
+      return {
+        ...state, 
         repos: action.repos,
         isFetching: false
-      });
+      };
 
     case Actions.RECEIVE_REPOS_FAIL:
       return Loop.loop(
-        Object.assign(state, { isFetching: false }),
+        { ...state, isFetching: false },
         Loop.Cmd.run( () => alert('FAILED!') )
       );
 

@@ -31,7 +31,6 @@ const Company = (props) => {
   const reposListView = () => {
     return (
       <div
-      style={{ opacity: company.isFetching ? 0.5 : 1 }}
       >
         { company.repos.length > 0 ? R.map(repoView, company.repos) : fetchView() }
       </div>
@@ -39,7 +38,9 @@ const Company = (props) => {
   };
 
   return (
-    <div>
+    <div
+    style={{ background: company.isFetching ? '#222' : '#479' }}
+    >
       <header>{ company.name }</header>
       
       { reposListView() }
@@ -51,12 +52,6 @@ const mapStateToProps = (state, ownProps) => {
   return {
     company: state.companies[ownProps.companyName]
   };
-}
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-  // return {
-  //   onClickToFetch: dispatch(ownProps.onClickToFetch)
-  // }
 }
 
 export default connect(mapStateToProps)(Company);
