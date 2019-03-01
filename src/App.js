@@ -1,28 +1,70 @@
 import React, { Component } from 'react';
+// import { combineReducers } from 'redux';
+import * as Loop from 'redux-loop';
+import { connect } from 'react-redux';
+import * as R from 'ramda';
+import PropTypes from 'prop-types';
+
 import logo from './logo.svg';
 import './App.css';
+import * as Actions from './actions';
+import Company from './Company';
+import Selector from './Selector';
 
 class App extends Component {
   render() {
+    const { companies, repos, selectedCompany, onSelect, onClickToFetch } = this.props;
+
+    const selectorOption = (company) => ({
+      key: company.name,
+      title: company.name
+    });
+
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          Fang Fetcher
         </header>
+
+        <Selector
+          options={ R.map(selectorOption, Object.values(companies)) }
+          selectedItem={ selectedCompany }
+          onSelect={ onSelect }
+        />
+
+        <Company 
+          companyName={ selectedCompany } 
+          onClickToFetch={ onClickToFetch(selectedCompany) }
+        />
       </div>
     );
   }
 }
 
-export default App;
+App.propTypes = {
+  companies: PropTypes.object.isRequired,
+  repos: PropTypes.array.isRequired,
+  selectedCompany: PropTypes.string.isRequired
+};
+
+
+const mapStateToProps = state => {
+  return {
+    companies: state.companies,
+    repos: state.companies[state.selectedCompany].repos,
+    selectedCompany: state.selectedCompany
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onSelect: companyName => (
+      () => dispatch(Actions.selectCompany(companyName))
+    ),
+    onClickToFetch: companyName => (
+      () => dispatch(Actions.requestRepos(companyName))
+    )
+  };
+};
+
+export const View = connect(mapStateToProps, mapDispatchToProps)(App);
