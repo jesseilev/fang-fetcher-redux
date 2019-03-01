@@ -13,7 +13,7 @@ import Selector from './Selector';
 
 class App extends Component {
   render() {
-    const { companies, repos, selectedCompany, onSelect, onClickToFetch } = this.props;
+    const { companies, selectedCompany, onSelect, onClickToFetch } = this.props;
 
     const selectorOption = (company) => ({
       key: company.name,
@@ -43,16 +43,16 @@ class App extends Component {
 
 App.propTypes = {
   companies: PropTypes.object.isRequired,
-  repos: PropTypes.array.isRequired,
-  selectedCompany: PropTypes.string.isRequired
+  selectedCompany: PropTypes.string.isRequired,
+  onSelect: PropTypes.func.isRequired,
+  onClickToFetch: PropTypes.func.isRequired
 };
 
 
 const mapStateToProps = state => {
   return {
     companies: state.companies,
-    repos: state.companies[state.selectedCompany].repos,
-    selectedCompany: state.selectedCompany
+    selectedCompany: state.selectedCompany,
   };
 };
 
