@@ -5,9 +5,10 @@ import * as Tasks from './tasks';
 
 
 
-const initCompany = companyName => {
+const initCompany = (companyName, githubName) => {
   return {
-    name: companyName,
+    companyName: companyName,
+    githubName: githubName,
     isFetching: false,
     repos: []
   };
@@ -16,10 +17,10 @@ const initCompany = companyName => {
 export const initialState = {
   selectedCompany: 'Facebook',
   companies: {
-    Facebook: initCompany('Facebook'),
-    Amazon: initCompany('Amazon'),
-    Netflix: initCompany('Netflix'),
-    Google: initCompany('Google')
+    Facebook: initCompany('Facebook', 'facebook'),
+    Amazon: initCompany('Amazon', 'amzn'),
+    Netflix: initCompany('Netflix', 'netflix'),
+    Google: initCompany('Google', 'google')
   }
 }
 
@@ -27,7 +28,7 @@ export const initialState = {
 
 
 const company = (state = initCompany('Facebook'), action) => {
-  if (action.companyName !== state.name) {
+  if (action.companyName !== state.companyName) {
     return state;
   }
 
@@ -38,9 +39,9 @@ const company = (state = initCompany('Facebook'), action) => {
       return Loop.loop(
         { ...state, isFetching: true },
         Loop.Cmd.run(Tasks.fetchRepo, {
-          successActionCreator: Actions.receiveReposSuccess(state.name),
+          successActionCreator: Actions.receiveReposSuccess(state.companyName),
           failActionCreator: Actions.receiveReposFail,
-          args: [state.name]
+          args: [state.githubName]
         })
       );
 

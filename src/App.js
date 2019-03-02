@@ -16,8 +16,8 @@ class App extends Component {
     const { companies, selectedCompany, onSelect, onClickToFetch } = this.props;
 
     const selectorOption = (company) => ({
-      key: company.name,
-      title: company.name
+      key: company.companyName,
+      title: company.companyName
     });
 
     return (

@@ -23,7 +23,7 @@ const Company = (props) => {
       <button
       onClick={onClickToFetch}
       >
-        Click to Fetch Repos from {company.name}
+        Click to Fetch Repos from {company.companyName}
       </button>
     );
   };
@@ -41,7 +41,7 @@ const Company = (props) => {
     <div
     style={{ background: company.isFetching ? '#222' : '#479' }}
     >
-      <header>{ company.name }</header>
+      <header>{ company.companyName }</header>
       
       { reposListView() }
     </div>
