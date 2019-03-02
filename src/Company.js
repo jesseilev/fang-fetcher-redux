@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as R from 'ramda';
+import Flexbox from 'flexbox-react';
 
 import * as Actions from './actions';
+
+const styles = {
+  company: isFetching => ({
+    border: '1px solid red',
+    opacity: isFetching ? '0.5' : '1'
+  })
+}
 
 
 const Company = (props) => {
@@ -10,18 +18,24 @@ const Company = (props) => {
   
   const repoView = repo => {
     return (
-      <div key={repo.id}>
-        <a href={repo.html_url}>
+      <Flexbox 
+        element='li'
+        key={repo.id}
+      >
+        <Flexbox 
+          element='a'
+          href={repo.html_url}
+        >
           {repo.name}
-        </a>
-      </div>
+        </Flexbox>
+      </Flexbox>
     );
   };
 
   const fetchView = () => {
     return (
       <button
-      onClick={onClickToFetch}
+        onClick={onClickToFetch}
       >
         Click to Fetch Repos from {company.companyName}
       </button>
@@ -30,21 +44,27 @@ const Company = (props) => {
 
   const reposListView = () => {
     return (
-      <div
+      <Flexbox
+        element='ul'
+        flexDirection='column'
       >
-        { company.repos.length > 0 ? R.map(repoView, company.repos) : fetchView() }
-      </div>
+        { company.repos.length > 0 
+            ? R.map(repoView, company.repos) 
+            : fetchView() 
+        }
+      </Flexbox>
     );
   };
 
   return (
-    <div
-    style={{ opacity: company.isFetching ? '0.5' : '1' }}
+    <Flexbox
+      flexDirection='column'
+      style={ styles.company(company.isFetching) }
     >
       <header>{ company.companyName }</header>
       
       { reposListView() }
-    </div>
+    </Flexbox>
   );
 };
 

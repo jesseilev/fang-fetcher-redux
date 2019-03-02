@@ -4,12 +4,15 @@ import * as Loop from 'redux-loop';
 import { connect } from 'react-redux';
 import * as R from 'ramda';
 import PropTypes from 'prop-types';
+import Flexbox from 'flexbox-react';
 
 import logo from './logo.svg';
 import './App.css';
 import * as Actions from './actions';
 import Company from './Company';
 import Selector from './Selector';
+
+
 
 class App extends Component {
   render() {
@@ -21,22 +24,39 @@ class App extends Component {
     });
 
     return (
-      <div className="App">
-        <header className="App-header">
+      <Flexbox
+        className='App'
+        flexDirection='column'
+        justifyContent='flex-start'
+        alignItems='center'
+        alignContent='center'
+        // style={{background: '#509'}}
+      >
+        <Flexbox 
+          element='header'
+          className="App-header"
+          padding='30px'
+        >
           Fang Fetcher
-        </header>
+        </Flexbox>
 
-        <Selector
-          options={ R.map(selectorOption, Object.values(companies)) }
-          selectedItem={ selectedCompany }
-          onSelect={ onSelect }
-        />
+        <Flexbox
+          element='main'
+          flexDirection='column'
+          justifyContent='center'
+        >
+          <Selector
+            options={ R.map(selectorOption, Object.values(companies)) }
+            selectedItem={ selectedCompany }
+            onSelect={ onSelect }
+          />
 
-        <Company 
-          companyName={ selectedCompany } 
-          onClickToFetch={ onClickToFetch(selectedCompany) }
-        />
-      </div>
+          <Company 
+            companyName={ selectedCompany } 
+            onClickToFetch={ onClickToFetch(selectedCompany) }
+          />
+        </Flexbox>
+      </Flexbox>
     );
   }
 }

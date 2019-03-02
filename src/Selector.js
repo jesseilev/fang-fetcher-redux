@@ -1,40 +1,42 @@
 import React from 'react';
 import * as R from 'ramda';
+import Flexbox from 'flexbox-react';
+
+
+const styles = {
+  option: isSelected => ({
+    background: isSelected ? 'red' : 'grey',
+    cursor: 'default'
+  })
+}
 
 const Selector = (props) => {
   const { options, selectedItem, onSelect } = props;
 
-  const optionView = option => (
-    <span
-    className='Selector-Option'
-    key={ option.key }
-    onClick={ onSelect(option.key) }
-    selected={ selectedItem == option.key }
-    >
-      { option.title }
-    </span>
-  );
+  const optionView = option => {
+    const isSelected = selectedItem == option.key;
+    return (
+      <Flexbox
+        className='Selector-option'
+        key={ option.key }
+        onClick={ onSelect(option.key) }
+        selected={ isSelected }
+        padding='8px'
+        style={ styles.option(isSelected) }
+      >
+        { option.title }
+      </Flexbox>
+    );
+  };
 
   return (
-    <div className='Selector'>
+    <Flexbox 
+      className='Selector'
+      flexDirection='row'
+    >
       { R.map(optionView, options) }
-    </div>
+    </Flexbox>
   );
 };
 
 export default Selector;
-
-// const mapStateToProps = (state, ownProps) => {
-//   return {
-//   };
-// }
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     onClick: companyName => (
-//       () => dispatch(Actions.requestRepos(companyName))
-//     )
-//   };
-// };
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Selector);
