@@ -39,7 +39,7 @@ const Company = (props) => {
 
   return (
     <div
-    style={{ background: company.isFetching ? '#222' : '#479' }}
+    style={{ opacity: company.isFetching ? '0.5' : '1' }}
     >
       <header>{ company.companyName }</header>
       
