@@ -5,7 +5,7 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import * as Loop from 'redux-loop';
 
 import './index.css';
-import * as App from './App';
+import * as App from './Containers/App';
 import { rootReducer, initialState } from './reducers';
 
 

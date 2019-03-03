@@ -6,11 +6,11 @@ import * as R from 'ramda';
 import PropTypes from 'prop-types';
 import Flexbox from 'flexbox-react';
 
-import logo from './logo.svg';
-import './App.css';
-import * as Actions from './actions';
-import Company from './Company';
-import Selector from './Selector';
+
+// import './App.css';
+import * as Actions from '../actions';
+import Company from '../Components/Company';
+import Selector from '../Components/Selector';
 
 
 
@@ -28,7 +28,8 @@ class App extends Component {
         className='App'
         flexDirection='column'
         justifyContent='flex-start'
-        alignItems='center'
+        // alignItems='center'
+        alignItems='stretch'
         alignContent='center'
         // style={{background: '#509'}}
       >
@@ -37,24 +38,33 @@ class App extends Component {
           className="App-header"
           padding='30px'
         >
-          Fang Fetcher
+          FANG Fetcher
         </Flexbox>
 
         <Flexbox
           element='main'
           flexDirection='column'
           justifyContent='center'
+          alignItems='stretch'
+          // padding='30px'
         >
-          <Selector
-            options={ R.map(selectorOption, Object.values(companies)) }
-            selectedItem={ selectedCompany }
-            onSelect={ onSelect }
-          />
 
-          <Company 
-            companyName={ selectedCompany } 
-            onClickToFetch={ onClickToFetch(selectedCompany) }
-          />
+          <Flexbox
+            flexDirection='column'
+            justifyContent='center'
+          >
+            <Selector
+              options={ R.map(selectorOption, Object.values(companies)) }
+              selectedItem={ selectedCompany }
+              onSelect={ onSelect }
+            />
+
+            <Company 
+              company={ companies[selectedCompany] }
+              onClickToFetch={ onClickToFetch(selectedCompany) }
+            />
+          </Flexbox>
+
         </Flexbox>
       </Flexbox>
     );

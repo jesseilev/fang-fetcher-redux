@@ -3,11 +3,10 @@ import { connect } from 'react-redux';
 import * as R from 'ramda';
 import Flexbox from 'flexbox-react';
 
-import * as Actions from './actions';
 
 const styles = {
   company: isFetching => ({
-    border: '1px solid red',
+    background: 'white',
     opacity: isFetching ? '0.5' : '1'
   })
 }
@@ -21,12 +20,18 @@ const Company = (props) => {
       <Flexbox 
         element='li'
         key={repo.id}
+
+        flexDirection='row'
       >
         <Flexbox 
           element='a'
           href={repo.html_url}
         >
           {repo.name}
+        </Flexbox>
+
+        <Flexbox>
+          * {repo.stargazers_count}
         </Flexbox>
       </Flexbox>
     );
@@ -42,16 +47,13 @@ const Company = (props) => {
     );
   };
 
-  const reposListView = () => {
+  const reposListView = repos => {
     return (
       <Flexbox
         element='ul'
         flexDirection='column'
       >
-        { company.repos.length > 0 
-            ? R.map(repoView, company.repos) 
-            : fetchView() 
-        }
+        { R.map(repoView, repos) }
       </Flexbox>
     );
   };
@@ -59,22 +61,25 @@ const Company = (props) => {
   return (
     <Flexbox
       flexDirection='column'
+      paddingTop='8px'
       style={ styles.company(company.isFetching) }
     >
-      <header>{ company.companyName }</header>
+
+      <Flexbox
+        element='header'
+      >
+        Repositories by { company.companyName }
+      </Flexbox>
       
-      { reposListView() }
+      { company.repos.length > 0  
+          ? reposListView(company.repos) 
+          : fetchView()
+      }
     </Flexbox>
   );
 };
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    company: state.companies[ownProps.companyName]
-  };
-}
-
-export default connect(mapStateToProps)(Company);
+export default Company;
 
 
 
