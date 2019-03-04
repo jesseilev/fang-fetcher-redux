@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import * as R from 'ramda';
 import Flexbox from 'flexbox-react';
 
+import Repo from './Repo';
+
 
 const styles = {
   company: isFetching => ({
@@ -14,28 +16,8 @@ const styles = {
 
 const Company = (props) => {
   const { company, onClickToFetch } = props;
-  
-  const repoView = repo => {
-    return (
-      <Flexbox 
-        element='li'
-        key={repo.id}
 
-        flexDirection='row'
-      >
-        <Flexbox 
-          element='a'
-          href={repo.html_url}
-        >
-          {repo.name}
-        </Flexbox>
-
-        <Flexbox>
-          * {repo.stargazers_count}
-        </Flexbox>
-      </Flexbox>
-    );
-  };
+  const repoView = repo => <Repo repo={repo} />;
 
   const fetchView = () => {
     return (
@@ -50,8 +32,11 @@ const Company = (props) => {
   const reposListView = repos => {
     return (
       <Flexbox
-        element='ul'
-        flexDirection='column'
+        // element='ul'
+        flexDirection='row'
+        flexWrap='wrap'
+        justifyContent='center'
+        alignContent='flex-start'
       >
         { R.map(repoView, repos) }
       </Flexbox>
@@ -61,15 +46,10 @@ const Company = (props) => {
   return (
     <Flexbox
       flexDirection='column'
-      paddingTop='8px'
+      padding='8px'
       style={ styles.company(company.isFetching) }
     >
 
-      <Flexbox
-        element='header'
-      >
-        Repositories by { company.companyName }
-      </Flexbox>
       
       { company.repos.length > 0  
           ? reposListView(company.repos) 

@@ -36,7 +36,7 @@ class App extends Component {
         <Flexbox 
           element='header'
           className="App-header"
-          padding='30px'
+          padding='8px'
         >
           FANG Fetcher
         </Flexbox>
