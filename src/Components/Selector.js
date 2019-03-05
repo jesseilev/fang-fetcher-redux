@@ -5,11 +5,11 @@ import Flexbox from 'flexbox-react';
 
 const styles = {
   option: isSelected => ({
-    background: isSelected ? 'white' : '#ccc',
-    // border: isSelected ? '2px solid red' : '0px',
-    // borderBottom: isSelected ? '0px' : '2px solid red',
+    background: isSelected ? 'white' : '#fdfdfd',
     cursor: 'default',
-    boxShadow: isSelected ? '0px 0px 5px 0px rgba(0,0,0, 0.1)' : 'inset 0px -1px 1px 0px rgba(0,0,0, 0.1)'
+    border: isSelected ? '1px solid #eee' : '0px',
+    borderBottom: isSelected ? '0px' : '1px solid #eee',
+    borderRadius: '2px'
   })
 }
 
@@ -24,10 +24,10 @@ const Selector = (props) => {
         onClick={ onSelect(option.key) }
         selected={ isSelected }
 
-        padding='8px'
+        padding='16px'
         flexGrow={1}
 
-        className='Selector-option'
+        className={ isSelected ? 'Selector-option_selected' : 'Selector-option' }
         style={ styles.option(isSelected) }
       >
         { option.title }
@@ -41,6 +41,7 @@ const Selector = (props) => {
       flexDirection='row'
       justifyContent='space-between'
       alignItems='stretch'
+      // minHeight='30px'
     >
       { R.map(optionView, options) }
     </Flexbox>

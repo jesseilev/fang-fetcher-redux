@@ -5,6 +5,7 @@
   "dependencies": {
     "cross-fetch": "^3.0.1",
     "flexbox-react": "^4.4.0",
+    "numeral": "^2.0.6",
     "prop-types": "^15.7.2",
     "ramda": "^0.26.1",
     "react": "^16.8.3",

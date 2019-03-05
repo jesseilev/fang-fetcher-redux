@@ -5,7 +5,7 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import * as Loop from 'redux-loop';
 
 import './index.css';
-import * as App from './Containers/App';
+import App from './Containers/App';
 import { rootReducer, initialState } from './reducers';
 
 
@@ -18,7 +18,7 @@ const store = createStore(rootReducer, initialState, middleware);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App.View />
+    <App />
   </Provider>,
   document.getElementById('root')
 );

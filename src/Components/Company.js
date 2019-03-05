@@ -10,7 +10,14 @@ const styles = {
   company: isFetching => ({
     background: 'white',
     opacity: isFetching ? '0.5' : '1'
-  })
+  }),
+  button: {
+    height: '50px',
+    color: 'white',
+    background: 'red',
+    borderRadius: '2px',
+    boxShadow: '1px 2px 2px 0px rgba(0,0,0,0.1)'
+  }
 }
 
 
@@ -21,11 +28,17 @@ const Company = (props) => {
 
   const fetchView = () => {
     return (
-      <button
-        onClick={onClickToFetch}
-      >
-        Click to Fetch Repos from {company.companyName}
-      </button>
+      <Flexbox>
+        <Flexbox
+          onClick={onClickToFetch}
+          alignItems='center'
+          padding='16px'
+          height='100px'
+          style={styles.button}
+        >
+          Load Repos from {company.companyName}
+        </Flexbox>
+      </Flexbox>
     );
   };
 
@@ -46,7 +59,11 @@ const Company = (props) => {
   return (
     <Flexbox
       flexDirection='column'
+      justifyContent='center'
+      alignItems='center'
+      flexGrow={1}
       padding='8px'
+      height='100%'
       style={ styles.company(company.isFetching) }
     >
 

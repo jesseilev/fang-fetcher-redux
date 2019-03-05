@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import Flexbox from 'flexbox-react';
 
 
-// import './App.css';
+import '../App.css';
 import * as Actions from '../actions';
 import Company from '../Components/Company';
 import Selector from '../Components/Selector';
@@ -31,12 +31,12 @@ class App extends Component {
         // alignItems='center'
         alignItems='stretch'
         alignContent='center'
-        // style={{background: '#509'}}
+        height='100%'
       >
         <Flexbox 
           element='header'
           className="App-header"
-          padding='8px'
+          padding='16px'
         >
           FANG Fetcher
         </Flexbox>
@@ -44,14 +44,16 @@ class App extends Component {
         <Flexbox
           element='main'
           flexDirection='column'
-          justifyContent='center'
+          justifyContent='flex-start'
           alignItems='stretch'
-          // padding='30px'
+          maxWidth='600px'
+          flexGrow={1}
         >
 
           <Flexbox
             flexDirection='column'
-            justifyContent='center'
+            justifyContent='flex-start'
+            flexGrow={1}
           >
             <Selector
               options={ R.map(selectorOption, Object.values(companies)) }
@@ -97,4 +99,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export const View = connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
