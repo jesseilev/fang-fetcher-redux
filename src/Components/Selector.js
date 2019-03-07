@@ -27,8 +27,12 @@ const Selector = (props) => {
         padding='16px'
         flexGrow={1}
 
-        className={ isSelected ? 'Selector-option_selected' : 'Selector-option' }
-        style={ styles.option(isSelected) }
+        className={ 
+          isSelected 
+            ? 'Selector-option Selector-option_selected' 
+            : 'Selector-option' 
+        }
+        // style={ styles.option(isSelected) }
       >
         { option.title }
       </Flexbox>

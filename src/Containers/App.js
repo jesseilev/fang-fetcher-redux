@@ -27,22 +27,36 @@ class App extends Component {
       <Flexbox
         className='App'
         flexDirection='column'
-        justifyContent='flex-start'
-        // alignItems='center'
-        alignItems='stretch'
+        justifyContent='center'
+        alignItems='center'
         alignContent='center'
         height='100%'
       >
         <Flexbox 
           element='header'
           className="App-header"
+
+          flexDirection='column'
+          alignItems='center'
           padding='16px'
+          width='100%'
         >
-          FANG Fetcher
+          <Flexbox 
+            className="App-header-title"
+          >
+            FANG Fetcher
+          </Flexbox>
+          <Flexbox 
+            className="App-header-subtitle"
+          >
+            Sink your teeth into the repositories of 
+            tech's most red-blooded companies.
+          </Flexbox>
         </Flexbox>
 
         <Flexbox
           element='main'
+          className='App-main'
           flexDirection='column'
           justifyContent='flex-start'
           alignItems='stretch'

@@ -23,7 +23,7 @@ const Repo = props => {
   const { repo } = props;
   return (
     <Flexbox 
-      // element='li'
+      className='Repo'
       key={repo.id}        
 
       flexDirection='column'
@@ -33,7 +33,7 @@ const Repo = props => {
       marginBottom='16px'
       // marginRight='16px'
       padding='16px'
-      style={styles.repo}
+      // style={styles.repo}
     >
       <Flexbox
         flexDirection='column'
@@ -57,7 +57,7 @@ const Repo = props => {
         </Flexbox>
 
         <Flexbox
-          // padding='8px'
+          className='Repo-stars'
         >          
            ★ { numeral(repo.stargazers_count).format('0a') }
       </Flexbox>
@@ -65,6 +65,7 @@ const Repo = props => {
       </Flexbox>
 
       <Flexbox
+        className='Repo-description'
         marginTop='8px'
       >
         {repo.description}
