@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/fang-fetcher-redux/static/css/2.33ab0548.chunk.css"
   },
   {
-    "revision": "e863c5c0c479c5e0067cc675236d1235",
+    "revision": "ec57753e6c6c550f7c543f2d2109b969",
     "url": "/fang-fetcher-redux/index.html"
   }
 ];

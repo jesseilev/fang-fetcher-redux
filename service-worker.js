@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/fang-fetcher-redux/precache-manifest.74a0b6b232c840316553fb4f3c759918.js"
+  "/fang-fetcher-redux/precache-manifest.0b272d66de182c1d1f1c86c2b1dee899.js"
 );
 
 workbox.clientsClaim();
