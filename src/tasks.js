@@ -10,3 +10,10 @@ export const fetchRepo = (companyName) => {
   return fetch(githubUrl + queryString(companyName))
     .then(response => response.json());
 };
+
+
+export const tickClock = (companyName) => {
+  return new Promise(resolve => {
+    setTimeout(resolve, 50);
+  });
+};

@@ -10,6 +10,7 @@ const initCompany = (companyName, githubName) => {
     companyName: companyName,
     githubName: githubName,
     isFetching: false,
+    ticksSinceRequest: 0,
     repos: []
   };
 };
@@ -25,9 +26,8 @@ export const initialState = {
 }
 
 
-
-
 const company = (state = initCompany('Facebook'), action) => {
+
   if (action.companyName !== state.companyName) {
     return state;
   }
@@ -36,13 +36,17 @@ const company = (state = initCompany('Facebook'), action) => {
   switch(action.type) {
 
     case Actions.REQUEST_REPOS:
+      const fetchRepoCmd = Loop.Cmd.run(Tasks.fetchRepo, {
+        successActionCreator: Actions.receiveReposSuccess(state.companyName),
+        failActionCreator: Actions.receiveReposFail,
+        args: [state.githubName]
+      });
+      const startClockCmd = Loop.Cmd.action(
+        Actions.clockDidTick(state.companyName)()
+      );
       return Loop.loop(
         { ...state, isFetching: true },
-        Loop.Cmd.run(Tasks.fetchRepo, {
-          successActionCreator: Actions.receiveReposSuccess(state.companyName),
-          failActionCreator: Actions.receiveReposFail,
-          args: [state.githubName]
-        })
+        Loop.Cmd.list([ fetchRepoCmd, startClockCmd ])
       );
 
     case Actions.RECEIVE_REPOS_SUCCESS: 
@@ -56,7 +60,21 @@ const company = (state = initCompany('Facebook'), action) => {
       return Loop.loop(
         { ...state, isFetching: false },
         Loop.Cmd.run( () => alert('FAILED!') )
+        // TODO handle failure for real
       );
+
+    case Actions.CLOCK_DID_TICK:
+      if (! state.isFetching) {
+        return { ...state, ticksSinceRequest: 0 };
+      }
+      else {
+        return Loop.loop(
+          { ...state, ticksSinceRequest: state.ticksSinceRequest + 1 },
+          Loop.Cmd.run(Tasks.tickClock, {
+            successActionCreator: Actions.clockDidTick(state.companyName),
+          })
+        );
+      }
 
     default:
       return state;

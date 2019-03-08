@@ -20,7 +20,6 @@ const Header = () => (
 
     flexDirection='column'
     alignItems='center'
-    padding='32px'
     flex='none'
   >
     <Flexbox 
@@ -44,27 +43,26 @@ const Footer = () => (
 
     flexDirection='row'
     justifyContent='flex-end'
-    padding='8px'
     flex='none'
   >
-    <Flexbox element='a'
+    <a
       href='https://github.com/jesseilev/fang-fetcher-redux'
     >
       View source on github
-    </Flexbox>
+    </a>
 
     <Flexbox
-      marginLeft='8px'
-      marginRight='8px'
+      marginLeft='1em'
+      marginRight='1em'
     >
       |
     </Flexbox>
 
-    <Flexbox element='a'
+    <a
       href='https://www.investopedia.com/terms/f/fang-stocks-fb-amzn.asp'
     >
       Huh? What is FANG?
-    </Flexbox>
+    </a>
   </Flexbox>
 );
 

@@ -9,6 +9,10 @@ import "react-simple-flex-grid/lib/main.css";
 import Repo from './Repo';
 
 
+const ring = (n, items) => {
+  return R.take(n, R.flatten(R.repeat(items, n)));
+}
+
 const styles = {
   company: isFetching => ({
     background: 'white',
@@ -27,30 +31,49 @@ const styles = {
 const Company = (props) => {
   const { company, onClickToFetch } = props;
 
-  const fetchButton = (
+  const FetchButton = () => (
     <Flexbox
       className='Company-button'
       onClick={onClickToFetch}
       alignItems='center'
-      padding='32px'
     >
       Fetch repos from {company.companyName}
     </Flexbox>
   );
 
-  const vampireView = (
-    <Flexbox>
-      (^,..,^)
+
+  const bloodDrips = () => {
+    const drip = (
+      <Flexbox className='Company-blooddrip'>&nbsp; &nbsp; {"'"} </Flexbox> 
+    );
+    const blank = (
+      <Flexbox className='Company-blooddrip'>&nbsp; &nbsp; &nbsp;</Flexbox> 
+    );
+    const sequence = R.flatten([
+      drip,
+      R.repeat(blank, 3),
+      drip,
+      R.repeat(blank, 8),
+      drip,
+      R.repeat(blank, 5)
+    ]);
+    return R.take(6, R.reverse(ring(company.ticksSinceRequest, sequence)));
+  }
+
+  const Vampire = () => (
+    <Flexbox
+      className='Company-vampire'
+      flexDirection='column'
+      height='100%'
+      justifyContent='flex-start'
+      paddingTop="6em"
+    >
+      <Flexbox>(^,..,^)</Flexbox>
+      { bloodDrips() }
     </Flexbox>
   );
 
-  const fetchView = (
-    <Flexbox 
-      className='Company-vampire'
-    >
-      { company.isFetching ? vampireView : fetchButton }
-    </Flexbox>
-  );
+  const fetchView = company.isFetching ? <Vampire /> : <FetchButton />;
 
   const reposListView = repos => {
     return (
@@ -61,14 +84,13 @@ const Company = (props) => {
         style= {{
           width: '100%',
           height: '100%',
-          padding: '20px'
+          padding: '1em'
         }}
       >
         { 
           R.map(repo => <Repo repo={repo}/>, repos) 
         }
       </Row>
-      // </Flexbox>
     );
   };
 
@@ -79,9 +101,7 @@ const Company = (props) => {
       justifyContent='center'
       alignItems='center'
       flexGrow={1}
-    >
-
-      
+    > 
       { company.repos.length > 0  
           ? reposListView(company.repos) 
           : fetchView

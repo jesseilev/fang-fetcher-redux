@@ -7,6 +7,8 @@ export const SELECT_COMPANY = 'SELECT_COMPANY';
 export const REQUEST_REPOS = 'REQUEST_REPOS';
 export const RECEIVE_REPOS_SUCCESS = 'RECEIVE_REPOS_SUCCESS';
 export const RECEIVE_REPOS_FAIL = 'RECEIVE_REPOS_FAIL';
+export const CLOCK_DID_TICK = 'CLOCK_DID_TICK';
+
 
 export const selectCompany = companyName => {
   return {
@@ -37,3 +39,10 @@ export const receiveReposFail = () => {
     type: RECEIVE_REPOS_FAIL
   };
 };
+
+export const clockDidTick = companyName => {
+  return () => ({
+    type: CLOCK_DID_TICK,
+    companyName
+  });
+}

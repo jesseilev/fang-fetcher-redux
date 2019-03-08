@@ -26,7 +26,6 @@ const Selector = (props) => {
 
         flexDirection='row'
         alignItems='center'
-        padding='14px'
         flexGrow={1}
 
         className={ 

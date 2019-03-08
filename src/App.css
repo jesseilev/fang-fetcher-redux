@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Laila');
 
 
-
+body {
+  background: rgb(13, 13, 13);
+}
 
 #root {
   height: 100vh;
@@ -10,56 +12,60 @@
 .App {
   font-size: calc(11px + 1vmin);
   font-family: "Laila";
-  font-weight: 500;
+  font-weight: 600;
   color: purple;
   background: rgb(13, 13, 13);
 }
 
 .App-header {
-  background-color: rgb(47.5, 43.3, 53.5);
+  background: rgb(47, 43, 53);
   text-align: center;
+  padding: 0;
+  padding-top: 2.5em;
+  padding-bottom: 2.5em;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 .App-header-title {
-  color: grey;
+  color: rgb(100, 100, 100);
   font-size: 1.5em;
-  letter-spacing: 12px;
+  letter-spacing: 0.5em;
 }
 
 .App-header-subtitle {
   color: rgb(13, 13, 13);
   font-size: 0.9em;
+  font-weight: normal
 }
 
 .App-main {
-  border: 3px solid rgb(47.5, 43.3, 53.5);
+  border: 3px solid rgb(47, 43, 53);
 }
 
 .App-main-container {
-  padding-top: 48px;
-  padding-bottom: 48px;
+  padding-top: 2em;
+  padding-bottom: 2em;
 }
 
 @media only screen and (max-width: 992px) {
   .App-main-container {
-    padding-top: 0px;
-    padding-bottom: 0px;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-width: 0;
   }
 }
 
-@media only screen and (max-width: 762px) {
-  
-}
-
 .App-footer {
-  background: rgb(47.5, 43.3, 53.5);
-  color: grey;
-  font-size: 0.8em;
+  background: rgb(47, 43, 53);
+  color: rgb(100, 100, 100);
+  font-size: 0.75em;
+  padding: 0.5em;
 }
 
 .App-footer a {
   text-decoration: none;
-  color: grey;
+  color: rgb(100, 100, 100);
 }
 
 .App-footer a:hover {
@@ -71,9 +77,12 @@
 }
 
 .Selector-option {
-  color: grey;
-  background: rgb(47.5, 43.3, 53.5);
-  font-size: 0.85em;
+  color: rgb(100, 100, 100);
+  background: rgb(47, 43, 53);
+  font-weight: bold;
+  font-size: 0.75em;
+  padding: 0.5em;
+  padding-left: 1em
 }
 
 .Selector-option_selected {
@@ -85,7 +94,7 @@
 }
 
 .Selector-option-acronym {
-  font-size: 1.4em;
+  font-size: 2em;
 }
 
 .Company {
@@ -94,68 +103,61 @@
 }
 
 .Company-button {
-  color: grey;
+  color: rgb(100, 100, 100);
   border-radius: 2px;
-  box-shadow: 1px -1px 0px 1px rgb(47.5, 43.3, 53.5);
+  box-shadow: 1px -2px 1px -1px rgb(47, 43, 53);
   cursor: pointer;
+  padding: 2em;
 }
 
 .Company-button:hover {
   color: lightGrey;
-  box-shadow: 1px -1px 1px 1px grey;
+  box-shadow: 1px -2px 2px -2px rgb(100, 100, 100);
+}
+
+.Company-button:active {
+  color: red;
 }
 
 .Company-vampire {
   color: lightGrey;
 }
 
-.Company-vampire-blood {
+.Company-blooddrip {
   color: red;
 }
 
 .Repo {
   border-width: 0;
   border-radius: 2px;
-  box-shadow: 1px -1px 0px 1px rgb(47.5, 43.3, 53.5);
+  box-shadow: 1px -2px 1px -1px rgb(47, 43, 53);
   overflow-x: scroll;
+  padding: 1.5em;
 }
 
+
+/*
 .Repo:hover {
-  box-shadow: 1px -1px 1px 1px grey;
-}
+  box-shadow: 1px -2px 2px -2px rgb(100, 100, 100);
+}*/
 
 .Repo-link {
   color: lightGrey;
   text-decoration: none;
+  text-align: left;
 }
 
 .Repo-link:hover {
   color: red;
-  /*text-decoration: underline;*/
 }
 
 .Repo-description {
-  color: grey;
-  font-size: 0.85em;
+  color: rgb(100, 100, 100);
+  font-size: 0.75em;
   text-align: left;
 }
 
 .Repo-stars {
-  color: rgb(47.5, 43.3, 53.5);
+  color: rgb(47, 43, 53);
 }
 
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

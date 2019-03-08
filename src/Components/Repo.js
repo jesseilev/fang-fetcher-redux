@@ -33,34 +33,32 @@ const Repo = props => {
       md={4}
       align='center'
 
-      style={{ padding: '20px' }}
+      style={{ padding: '1em' }}
     >
       <Flexbox
         className='Repo'
-
         flexDirection='column'
-
-        padding='20px'
+        key={repo.name + '_container'}
       >
 
-        <Flexbox 
-          element='a'
+        <a 
           className='Repo-link'       
           href={repo.html_url}
-          // padding='8px'
+          key={repo.name + '_title'}
         >
           {repo.name}
-        </Flexbox>
+        </a>
 
         <Flexbox
           className='Repo-stars'
+          key={repo.name + '_stars'}
         >          
            ★ { numeral(repo.stargazers_count).format('0a') }
         </Flexbox>
 
         <Flexbox
           className='Repo-description'
-          // marginTop='8px'
+          key={repo.name + '_description'}
         >
           {repo.description}
         </Flexbox>
