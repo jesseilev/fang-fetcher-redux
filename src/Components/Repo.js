@@ -4,22 +4,6 @@ import numeral from 'numeral';
 import { Row, Col } from 'react-simple-flex-grid';
 
 
-const styles = {
-  repo: {
-    border: '1px solid #eee',
-    boxShadow: '1px 1px 5px 0px rgba(0, 0, 0, 0.02)'
-  }
-};
-
-const prettyNumber = n => {
-  // if (n < 1000) {
-  //   return n;
-  // }
-
-  // return (n / 1000) 
-
-};
-
 
 const Repo = props => {
   const { repo } = props;
@@ -31,16 +15,12 @@ const Repo = props => {
       xs={12}
       sm={6}
       md={4}
-      align='center'
-
-      style={{ padding: '1em' }}
     >
       <Flexbox
         className='Repo'
         flexDirection='column'
         key={repo.name + '_container'}
       >
-
         <a 
           className='Repo-link'       
           href={repo.html_url}

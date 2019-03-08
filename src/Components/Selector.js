@@ -3,16 +3,6 @@ import * as R from 'ramda';
 import Flexbox from 'flexbox-react';
 
 
-const styles = {
-  option: isSelected => ({
-    background: isSelected ? 'white' : '#fdfdfd',
-    cursor: 'default',
-    border: isSelected ? '1px solid #eee' : '0px',
-    borderBottom: isSelected ? '0px' : '1px solid #eee',
-    borderRadius: '2px'
-  })
-}
-
 const Selector = (props) => {
   const { options, selectedItem, onSelect } = props;
 

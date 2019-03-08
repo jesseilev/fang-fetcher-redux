@@ -5,28 +5,12 @@ import Flexbox from 'flexbox-react';
 import { Row, Col } from 'react-simple-flex-grid';
 import "react-simple-flex-grid/lib/main.css";
 
-
 import Repo from './Repo';
 
 
 const ring = (n, items) => {
   return R.take(n, R.flatten(R.repeat(items, n)));
 }
-
-const styles = {
-  company: isFetching => ({
-    background: 'white',
-    opacity: isFetching ? '0.5' : '1'
-  }),
-  button: {
-    height: '50px',
-    color: 'white',
-    background: 'red',
-    borderRadius: '2px',
-    boxShadow: '1px 2px 2px 0px rgba(0,0,0,0.1)'
-  }
-}
-
 
 const Company = (props) => {
   const { company, onClickToFetch } = props;
@@ -41,13 +25,12 @@ const Company = (props) => {
     </Flexbox>
   );
 
-
   const bloodDrips = () => {
     const drip = (
-      <Flexbox className='Company-blooddrip'>&nbsp; &nbsp; {"'"} </Flexbox> 
+      <Flexbox className='Company-bloodDrip'>&nbsp; &nbsp; {"'"} </Flexbox> 
     );
     const blank = (
-      <Flexbox className='Company-blooddrip'>&nbsp; &nbsp; &nbsp;</Flexbox> 
+      <Flexbox className='Company-bloodDrip'>&nbsp; &nbsp; &nbsp;</Flexbox> 
     );
     const sequence = R.flatten([
       drip,
@@ -78,14 +61,9 @@ const Company = (props) => {
   const reposListView = repos => {
     return (
       <Row 
-        gutter={50}
+        className='Company-reposListView'
         align='center'
-
-        style= {{
-          width: '100%',
-          height: '100%',
-          padding: '1em'
-        }}
+        style= {{ width: '100%' }}
       >
         { 
           R.map(repo => <Repo repo={repo}/>, repos) 
@@ -102,7 +80,8 @@ const Company = (props) => {
       alignItems='center'
       flexGrow={1}
     > 
-      { company.repos.length > 0  
+      { 
+        company.repos.length > 0  
           ? reposListView(company.repos) 
           : fetchView
       }

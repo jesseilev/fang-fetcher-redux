@@ -82,7 +82,8 @@ const App = props => {
       justifyContent='center'
       alignItems='stretch'
       alignContent='center'
-      height='100%'
+      flexGrow={1}
+      minHeight='100%'
     >
       <Header />
 
