@@ -13,54 +13,94 @@ import Company from '../Components/Company';
 import Selector from '../Components/Selector';
 
 
+const Header = () => (
+  <Flexbox 
+    element='header'
+    className="App-header"
 
-class App extends Component {
-  render() {
-    const { companies, selectedCompany, onSelect, onClickToFetch } = this.props;
+    flexDirection='column'
+    alignItems='center'
+    padding='32px'
+    flex='none'
+  >
+    <Flexbox 
+      className="App-header-title"
+    >
+      FANG Fetcher
+    </Flexbox>
+    <Flexbox 
+      className="App-header-subtitle"
+    >
+      Sink your teeth into the repositories of 
+      tech's most red-blooded companies.
+    </Flexbox>
+  </Flexbox>
+);
 
-    const selectorOption = (company) => ({
-      key: company.companyName,
-      title: company.companyName
-    });
 
-    return (
+const Footer = () => (
+  <Flexbox element='footer'
+    className='App-footer'
+
+    flexDirection='row'
+    justifyContent='flex-end'
+    padding='8px'
+    flex='none'
+  >
+    <Flexbox element='a'
+      href='https://github.com/jesseilev/fang-fetcher-redux'
+    >
+      View source on github
+    </Flexbox>
+
+    <Flexbox
+      marginLeft='8px'
+      marginRight='8px'
+    >
+      |
+    </Flexbox>
+
+    <Flexbox element='a'
+      href='https://www.investopedia.com/terms/f/fang-stocks-fb-amzn.asp'
+    >
+      Huh? What is FANG?
+    </Flexbox>
+  </Flexbox>
+);
+
+const App = props => {
+
+  const { companies, selectedCompany, onSelect, onClickToFetch } = props;
+
+  const selectorOptionData = (company) => ({
+    key: company.companyName,
+    title: company.companyName
+  });
+
+  return (
+    <Flexbox
+      className='App'
+      flexDirection='column'
+      justifyContent='center'
+      alignItems='stretch'
+      alignContent='center'
+      height='100%'
+    >
+      <Header />
+
       <Flexbox
-        className='App'
-        flexDirection='column'
+        className='App-main-container'
+        flexDirection='row'
         justifyContent='center'
-        alignItems='center'
-        alignContent='center'
-        height='100%'
+        flexGrow={1}
       >
-        <Flexbox 
-          element='header'
-          className="App-header"
-
-          flexDirection='column'
-          alignItems='center'
-          padding='16px'
-          width='100%'
-        >
-          <Flexbox 
-            className="App-header-title"
-          >
-            FANG Fetcher
-          </Flexbox>
-          <Flexbox 
-            className="App-header-subtitle"
-          >
-            Sink your teeth into the repositories of 
-            tech's most red-blooded companies.
-          </Flexbox>
-        </Flexbox>
-
         <Flexbox
           element='main'
           className='App-main'
           flexDirection='column'
           justifyContent='flex-start'
           alignItems='stretch'
-          maxWidth='600px'
+          maxWidth='992px'
           flexGrow={1}
         >
 
@@ -70,7 +110,7 @@ class App extends Component {
             flexGrow={1}
           >
             <Selector
-              options={ R.map(selectorOption, Object.values(companies)) }
+              options={ R.map(selectorOptionData, Object.values(companies)) }
               selectedItem={ selectedCompany }
               onSelect={ onSelect }
             />
@@ -83,9 +123,12 @@ class App extends Component {
 
         </Flexbox>
       </Flexbox>
-    );
-  }
-}
+
+      <Footer />
+
+    </Flexbox>
+  );
+};
 
 App.propTypes = {
   companies: PropTypes.object.isRequired,

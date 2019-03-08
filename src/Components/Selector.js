@@ -24,7 +24,9 @@ const Selector = (props) => {
         onClick={ onSelect(option.key) }
         selected={ isSelected }
 
-        padding='16px'
+        flexDirection='row'
+        alignItems='center'
+        padding='14px'
         flexGrow={1}
 
         className={ 
@@ -32,9 +34,11 @@ const Selector = (props) => {
             ? 'Selector-option Selector-option_selected' 
             : 'Selector-option' 
         }
-        // style={ styles.option(isSelected) }
       >
-        { option.title }
+        <Flexbox className='Selector-option-acronym'>
+          { option.title[0] }
+        </Flexbox>
+        { option.title.slice(1).toUpperCase() }
       </Flexbox>
     );
   };
@@ -45,7 +49,9 @@ const Selector = (props) => {
       flexDirection='row'
       justifyContent='space-between'
       alignItems='stretch'
-      // minHeight='30px'
+      flex='none'
+      flexGrow={0}
+      // minHeight='50px'
     >
       { R.map(optionView, options) }
     </Flexbox>

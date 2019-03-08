@@ -27,7 +27,7 @@ export const receiveReposSuccess = companyName => {
     return {
       type: RECEIVE_REPOS_SUCCESS,
       companyName,
-      repos: R.take(5, json.items)
+      repos: R.take(18, json.items)
     };
   };
 };

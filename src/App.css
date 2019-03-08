@@ -1,35 +1,69 @@
 @import url('https://fonts.googleapis.com/css?family=Laila');
 
 
+
+
 #root {
   height: 100vh;
 }
 
 .App {
-  font-size: 16px;
+  font-size: calc(11px + 1vmin);
   font-family: "Laila";
+  font-weight: 500;
   color: purple;
-  background: black;
+  background: rgb(13, 13, 13);
 }
 
 .App-header {
-  background-color: purple;
-  /*font-size: calc(10px + 2vmin);*/
+  background-color: rgb(47.5, 43.3, 53.5);
+  text-align: center;
 }
 
 .App-header-title {
   color: grey;
-  font-size: 24px;
+  font-size: 1.5em;
   letter-spacing: 12px;
 }
 
 .App-header-subtitle {
-  color: black;
-  font-size: 16px;
+  color: rgb(13, 13, 13);
+  font-size: 0.9em;
 }
 
 .App-main {
-  border: 3px solid purple;
+  border: 3px solid rgb(47.5, 43.3, 53.5);
+}
+
+.App-main-container {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+@media only screen and (max-width: 992px) {
+  .App-main-container {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+}
+
+@media only screen and (max-width: 762px) {
+  
+}
+
+.App-footer {
+  background: rgb(47.5, 43.3, 53.5);
+  color: grey;
+  font-size: 0.8em;
+}
+
+.App-footer a {
+  text-decoration: none;
+  color: grey;
+}
+
+.App-footer a:hover {
+  color: lightGrey;
 }
 
 .Selector {
@@ -38,37 +72,52 @@
 
 .Selector-option {
   color: grey;
-  background: purple;
+  background: rgb(47.5, 43.3, 53.5);
+  font-size: 0.85em;
 }
 
 .Selector-option_selected {
-  background: black;
+  background: rgb(13, 13, 13);
 }
 
 .Selector-option:hover {
-  color: white;
+  color: lightGrey;
+}
+
+.Selector-option-acronym {
+  font-size: 1.4em;
 }
 
 .Company {
-  background: black;
+  /*background: rgb(13, 13, 13);*/
+  overflow-y: scroll;
 }
 
 .Company-button {
   color: grey;
   border-radius: 2px;
-  box-shadow: 1px -1px 0px 1px purple;
+  box-shadow: 1px -1px 0px 1px rgb(47.5, 43.3, 53.5);
   cursor: pointer;
 }
 
 .Company-button:hover {
-  color: white;
+  color: lightGrey;
   box-shadow: 1px -1px 1px 1px grey;
+}
+
+.Company-vampire {
+  color: lightGrey;
+}
+
+.Company-vampire-blood {
+  color: red;
 }
 
 .Repo {
   border-width: 0;
   border-radius: 2px;
-  box-shadow: 1px -1px 0px 1px purple;
+  box-shadow: 1px -1px 0px 1px rgb(47.5, 43.3, 53.5);
+  overflow-x: scroll;
 }
 
 .Repo:hover {
@@ -76,8 +125,7 @@
 }
 
 .Repo-link {
-  color: white;
-  font-size: 15px;
+  color: lightGrey;
   text-decoration: none;
 }
 
@@ -88,10 +136,12 @@
 
 .Repo-description {
   color: grey;
+  font-size: 0.85em;
+  text-align: left;
 }
 
 .Repo-stars {
-  color: purple;
+  color: rgb(47.5, 43.3, 53.5);
 }
 
 

@@ -1,6 +1,8 @@
 import React from 'react';
 import Flexbox from 'flexbox-react';
 import numeral from 'numeral';
+import { Row, Col } from 'react-simple-flex-grid';
+
 
 const styles = {
   repo: {
@@ -22,29 +24,23 @@ const prettyNumber = n => {
 const Repo = props => {
   const { repo } = props;
   return (
-    <Flexbox 
-      className='Repo'
-      key={repo.id}        
+    <Col
+      className='Repo-container'
+      key={repo.name}
 
-      flexDirection='column'
-      // justifyContent='space-between'
-      width='100%'
-      // maxWidth='400px'
-      marginBottom='16px'
-      // marginRight='16px'
-      padding='16px'
-      // style={styles.repo}
+      xs={12}
+      sm={6}
+      md={4}
+      align='center'
+
+      style={{ padding: '20px' }}
     >
       <Flexbox
-        flexDirection='column'
-        minWidth='150px'
-        // alignItems='flex-end'
-        marginRight='16px'
-        paddingRight='16px'
+        className='Repo'
 
-        // flexGrow={1}
-        // justifyContent='space-between'
-        style={{ borderBottoms: '1px solid #eee' }}
+        flexDirection='column'
+
+        padding='20px'
       >
 
         <Flexbox 
@@ -60,18 +56,18 @@ const Repo = props => {
           className='Repo-stars'
         >          
            ★ { numeral(repo.stargazers_count).format('0a') }
-      </Flexbox>
+        </Flexbox>
+
+        <Flexbox
+          className='Repo-description'
+          // marginTop='8px'
+        >
+          {repo.description}
+        </Flexbox>
 
       </Flexbox>
+    </Col>
 
-      <Flexbox
-        className='Repo-description'
-        marginTop='8px'
-      >
-        {repo.description}
-      </Flexbox>
-
-    </Flexbox>
   );
 }
 

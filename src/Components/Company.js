@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as R from 'ramda';
 import Flexbox from 'flexbox-react';
+import { Row, Col } from 'react-simple-flex-grid';
+import "react-simple-flex-grid/lib/main.css";
+
 
 import Repo from './Repo';
 
@@ -24,38 +27,48 @@ const styles = {
 const Company = (props) => {
   const { company, onClickToFetch } = props;
 
-  const fetchView = () => {
-    return (
-      <Flexbox>
-        <Flexbox
-          className='Company-button'
-          onClick={onClickToFetch}
-          alignItems='center'
-          padding='16px'
-          height='100px'
-          // style={styles.button}
-        >
-          Load Repos from {company.companyName}
-        </Flexbox>
-      </Flexbox>
-    );
-  };
+  const fetchButton = (
+    <Flexbox
+      className='Company-button'
+      onClick={onClickToFetch}
+      alignItems='center'
+      padding='32px'
+    >
+      Fetch repos from {company.companyName}
+    </Flexbox>
+  );
+
+  const vampireView = (
+    <Flexbox>
+      (^,..,^)
+    </Flexbox>
+  );
+
+  const fetchView = (
+    <Flexbox 
+      className='Company-vampire'
+    >
+      { company.isFetching ? vampireView : fetchButton }
+    </Flexbox>
+  );
 
   const reposListView = repos => {
     return (
-      <Flexbox
-        flexDirection='row'
-        flexWrap='wrap'
-        justifyContent='center'
-        alignContent='flex-start'
+      <Row 
+        gutter={50}
+        align='center'
+
+        style= {{
+          width: '100%',
+          height: '100%',
+          padding: '20px'
+        }}
       >
         { 
-          R.map(
-            repo => <Repo repo={repo}/>, 
-            repos
-          ) 
+          R.map(repo => <Repo repo={repo}/>, repos) 
         }
-      </Flexbox>
+      </Row>
+      // </Flexbox>
     );
   };
 
@@ -66,15 +79,12 @@ const Company = (props) => {
       justifyContent='center'
       alignItems='center'
       flexGrow={1}
-      padding='8px'
-      height='100%'
-      // style={ styles.company(company.isFetching) }
     >
 
       
       { company.repos.length > 0  
           ? reposListView(company.repos) 
-          : fetchView()
+          : fetchView
       }
     </Flexbox>
   );
